@@ -1,0 +1,258 @@
+{
+  "project": {
+    "source": "prompt",
+    "concept": "A melancholic late-night vignette in a dim 1990s neon-lit bar: a 32-year-old East Asian man in a charcoal wool trench coat sits alone beside a rain-streaked window, performing the ballad entirely without lip-sync - his mouth stays closed and the emotion carries through posture, gaze, and breath. He reaches for a heavy faceted crystal rocks glass of amber whiskey, lifts it slowly toward his chest, pauses with a clenched jaw, and sets it back down without drinking as the condensation rolls down the glass.",
+    "genre": "Cinematic neo-noir ballad music video",
+    "visual_style": "Cinematic 35mm film aesthetic: shallow depth of field, anamorphic blue-amber chromatic palette, rain-softened neon highlights, mahogany and cut-crystal specular detail, soft halation, and fine film grain.",
+    "mood": "Melancholic, intimate, suspended, quietly resigned",
+    "target_duration_seconds": 13.032,
+    "aspect_ratio": "9:16",
+    "generation_strategy": "one-continuous-shot",
+    "segments_count": 1,
+    "reference_image": null,
+    "primary_objective": "Lock the trench-coated man, the faceted crystal whiskey glass, and the rainy neon bar across one H3 segment, keep every lip closed (no lip-sync), then mix the original track over the rendered footage."
+  },
+  "subject_continuity": {
+    "characters": [
+      {
+        "name": "Wanderer",
+        "description": "<Subject 1> is the 32-year-old East Asian man from `character_wanderer_front.png`: sharp jawline, tired melancholic eyes, short swept-back damp black hair, wearing a tailored charcoal wool trench coat over a high-neck black ribbed sweater, dark pleated trousers, and polished black oxfords.",
+        "consistency_notes": [
+          "Face: sharp jawline, tired melancholic eyes with soft under-eye shadows.",
+          "Hair: short, swept back, damp black hair.",
+          "Wardrobe immutable: tailored charcoal wool trench coat, high-neck black ribbed sweater, dark pleated trousers, polished black oxfords.",
+          "Hands stay natural: five fingers per hand, fingers curling around the heavy crystal glass, thumb resting on the facet.",
+          "Silent acting: lips remain closed, no spoken dialogue, no lip-sync; the man is the sole character and the emotional focus of the segment."
+        ]
+      }
+    ],
+    "style_lock": "Cinematic 35mm film aesthetic with shallow depth of field, anamorphic blue-amber chromatic palette, rain-softened neon highlights, soft halation, and fine film grain.",
+    "palette": [
+      "charcoal",
+      "black ribbed knit",
+      "amber whiskey",
+      "cyan neon",
+      "warm tungsten",
+      "deep mahogany",
+      "velvet burgundy"
+    ],
+    "world_rules": [
+      "Single location: the interior of a dim 1990s neon-lit bar at night.",
+      "Rain streaks the window; blurred neon city lights bleed cyan and amber through the glass.",
+      "The faceted crystal rocks glass is the only handheld prop and stays in his hand or on the tabletop throughout.",
+      "He sits angled to the window; the mahogany counter, velvet booth, and brass-framed mirror wall stay behind him in the same positions.",
+      "The room is lit by neon spill and a warm low tungsten lamp; light direction stays constant across the segment.",
+      "Mouth stays closed for the entire clip; the performance is carried by posture, gaze, and breath only.",
+      "Reference sheets render at 1920x1080 (16:9); H3 renders the video in portrait at the workflow's native 9:16 resolution."
+    ]
+  },
+  "references": {
+    "inventory": {
+      "character_count": 1,
+      "prop_count": 1,
+      "location_count": 1
+    },
+    "character_sheets": [
+      {
+        "role": "Wanderer",
+        "generation_prompt": "A photorealistic four-panel character turnaround reference sheet showing a 32-year-old East Asian man in full-length views: front, 90-degree profile, 45-degree three-quarter, and back. He has a sharp jawline, tired melancholic eyes with soft under-eye shadows, and short swept-back damp black hair. His wardrobe is a tailored charcoal wool trench coat with visible woven fabric texture, worn open over a high-neck black ribbed sweater, dark pleated trousers, and polished black oxfords. He stands in a relaxed neutral pose with his arms at his sides and hands relaxed, rendered with natural skin texture and visible pores. The sheet sits on a neutral studio cyclorama background with uniform soft diffusion lighting and gentle contact shadows beneath his feet, captured with an 85mm f/4 lens, even focus across all four panels, true-to-life color rendering, fine film grain, and clean panel edges.",
+        "key_frame_file": "character_wanderer_front.png",
+        "views": [
+          "front",
+          "3/4",
+          "side",
+          "back",
+          "tired melancholic gaze",
+          "glass-cradling hand"
+        ],
+        "source": "generated",
+        "notes": "Four-view turnaround locking the man's face, damp swept-back hair, charcoal trench coat, black ribbed sweater, pleated trousers, and oxfords."
+      }
+    ],
+    "environment_sheets": [
+      {
+        "name": "Dim rainy 1990s neon-lit bar interior",
+        "generation_prompt": "A photorealistic four-view cardinal perspective grid of a dim, rainy 1990s neon-lit bar interior, presenting 0-degree Front, 90-degree Right, 180-degree Reverse, and 270-degree Left views in one continuous layout. The Front view reveals a rain-streaked window overlooking hazy neon signage; the Right view shows a dark mahogany counter lined with vintage spirits bottles; the Reverse view reveals deep velvet booth seating and the entrance door; the Left view presents a brass-framed mirror wall reflecting soft amber lighting. Consistent diffuse atmospheric haze, warm tungsten glow, amber and cyan neon spill, wet highlights on wood and brass, beaded droplets on the window glass, and soft neon bokeh fill the grid, captured with a 24mm f/5.6 lens, deep focus, natural low-light sensor response, rich shadow detail, and fine film grain.",
+        "key_frame_file": "env_neon_bar_rain.png",
+        "source": "generated",
+        "notes": "Four-cardinal-view key frame locking the rain-streaked window, mahogany counter, velvet booth, brass mirror wall, and the cyan/amber light direction."
+      }
+    ],
+    "prop_sheets": [
+      {
+        "name": "Faceted crystal rocks glass with amber whiskey",
+        "generation_prompt": "A photorealistic multi-angle prop reference sheet of a heavy-bottomed vintage faceted crystal rocks glass holding two fingers of amber whiskey and a single melting clear ice cube, shown from front, three-quarter, and top angles against a neutral studio grey seamless. The cut crystal facets refract warm amber highlights, the whiskey reads as deep cognac with a glowing edge, and clear condensation beads cling to the outer glass surface above the liquid line. Edge lighting defines the sharp facet geometry while a soft key reveals the ice cube's internal fractures and slow melt, shot with a 100mm macro lens at f/8 for crisp facet detail, controlled studio reflections, true-to-life color science, and fine film grain.",
+        "key_frame_file": "prop_crystal_whiskey_glass.png",
+        "source": "generated",
+        "notes": "Three-view prop sheet locking the faceted crystal, amber whiskey level, ice cube, and condensation beads."
+      }
+    ]
+  },
+  "continuity_manifest": [
+    {
+      "subject": "Wanderer",
+      "reference_file": "character_wanderer_front.png",
+      "segment_ids": [
+        1
+      ],
+      "weight": "high",
+      "notes": "Face, damp swept-back hair, charcoal trench coat, black ribbed sweater, pleated trousers, and oxfords are locked for the single segment; he is Picture 1."
+    },
+    {
+      "subject": "Dim rainy 1990s neon-lit bar interior",
+      "reference_file": "env_neon_bar_rain.png",
+      "segment_ids": [
+        1
+      ],
+      "weight": "medium",
+      "notes": "The rain-streaked window, mahogany counter, velvet booth, brass mirror wall, and cyan/amber light direction are locked as Picture 2."
+    },
+    {
+      "subject": "Faceted crystal rocks glass with amber whiskey",
+      "reference_file": "prop_crystal_whiskey_glass.png",
+      "segment_ids": [
+        1
+      ],
+      "weight": "low",
+      "notes": "The crystal facets, whiskey level, ice cube, and condensation stay consistent through the lift and set-down; staged in the third reference slot."
+    }
+  ],
+  "segments": [
+    {
+      "id": 1,
+      "timecode": "0:00-0:12.958",
+      "start": 0.0,
+      "end": 12.958,
+      "duration": 12.958,
+      "narrative_purpose": "Carry the whole ballad in one continuous take: establish the man's isolation, then let the suppressed gesture of lifting the glass and putting it down without drinking carry the emotional turn. No lip-sync at any point.",
+      "action": "He sits beside the rain-streaked window, stares unfocused into the distant city lights, lowers his gaze, curls his fingers around the heavy crystal glass, lifts it two inches from the damp table, hesitates with a clenched jaw, and rests it back down without taking a sip.",
+      "character_blocking": "Seated at the window table, shoulders dropped, glass raised to chest height and lowered again, mouth closed throughout.",
+      "camera": {
+        "angle": "eye level, then side profile",
+        "size": "medium close-up, then side-profile close-up",
+        "move": "slow push-in with small amplitude, then slow right track with small amplitude",
+        "notes": "Two internal shots: a push-in on the still, closed-mouth face at the window, then a cut at 00:06.500 to a profile close-up of the hand on the glass."
+      },
+      "motion": "Breath lightly fogging the cold glass; eyes hold unfocused on the rain; jaw clenches at the lift; the glass rises two inches, pauses, and returns to the wood.",
+      "secondary_motion": "Rain streams down the pane; neon reflections shimmer on the wet glass; condensation rolls down the outside of the rocks glass; a low hum sits under the room tone.",
+      "lighting": "Cool cyan neon spill from camera left and warm tungsten bar light from camera right, with soft amber halation around the window edge and deep shadow on the booth side.",
+      "transition_in": "Fade in from black",
+      "transition_out": "Dissolve to black",
+      "cut": {
+        "type": "straight-cut",
+        "description": "Single continuous segment opened by a fade from black and closed by a dissolve to black, with one straight cut at 00:06.500 from the push-in to the profile close-up.",
+        "audio_overlap_seconds": null,
+        "composition_plan": {
+          "opens_on": "N/A - first (and only) segment",
+          "ends_on": "close-up of the heavy crystal glass resting on the damp mahogany table, rack-focusing to his closed mouth and downcast eyes"
+        }
+      },
+      "sound_cue": "Steady rain against the window, muffled city ambience, neon ballast hum, the dull thud of crystal on wood, and a faint liquid slosh as the glass lifts.",
+      "focus_hierarchy": [
+        "Primary: the man's eyes and closed mouth, then his hand on the crystal glass.",
+        "Secondary: rain streaks and neon bokeh on the window pane.",
+        "Background: mahogany counter, velvet booth, and brass-framed mirror wall in soft focus."
+      ],
+      "reference_image": "character_wanderer_front.png",
+      "beats": [
+        {
+          "time_offset": "0:00.000",
+          "location_or_event": "window table, dim neon-lit bar",
+          "action": "He sits with dropped shoulders, breathing faintly against the cold glass and staring silently into the rain, lips closed.",
+          "outfit": "charcoal trench coat, black ribbed sweater, dark pleated trousers, black oxfords"
+        },
+        {
+          "time_offset": "0:06.500",
+          "location_or_event": "side-profile close-up at the window",
+          "action": "He lowers his gaze, curls his fingers around the heavy crystal glass, lifts it two inches, pauses with tight jaw tension, and sets it back on the damp wood without drinking, mouth still closed.",
+          "outfit": "same charcoal trench coat and black ribbed sweater"
+        }
+      ],
+      "ref2va": {
+        "subject_definitions": [
+          "<Subject 1> is the 32-year-old East Asian man wearing a charcoal wool trench coat and black ribbed sweater, mapped to <Picture 1>.",
+          "<Subject 2> is the rain-streaked window booth inside the retro amber-lit bar, mapped to <Picture 2>.",
+          "<Picture 1> is the character turnaround sheet establishing <Subject 1>'s facial likeness, hairstyle, and wardrobe.",
+          "<Picture 2> is the 4-view environment reference sheet establishing the bar interior and rain-streaked glass.",
+          "<Audio 1> is the non-diegetic vocal track (\"往事如风... 痴情只是难懂... 借酒相送... 送不走身影朦胧\")."
+        ],
+        "summary": "[reference generation + audio reference] A 12-second cinematic sequence tracking a solitary man at a rain-slicked window table inside a dim tavern. The generation maintains continuous visual fidelity from <Picture 1> and atmospheric coherence from <Picture 2> synchronized to <Audio 1>, featuring purely physical acting without any spoken dialogue or lipsync.",
+        "retention_analysis": [
+          "<Subject 1> (appears in [Shot 1], [Shot 2]): fully_preserved - Facial anatomy, swept-back damp hair, and charcoal trench coat texture strictly maintained.",
+          "<Subject 2> (appears in [Shot 1], [Shot 2]): fully_preserved - Mahogany wood tones, amber neon reflections, and rain droplet patterns fully preserved.",
+          "<Picture 1>: fully_copy - Baseline character identity and costume details directly transferred.",
+          "<Picture 2>: reference - Architectural fixtures, palette, and lighting setup preserved.",
+          "<Audio 1>: reference - Paces the narrative cutting points and actor's deliberate, measured pauses."
+        ],
+        "detailed_description": "Cinematic 35mm film aesthetic, shallow depth of field, anamorphic blue-amber chromatic palette. No spoken dialogue; lips remain closed.\n[Shot 1] The scene opens on <Subject 1> seated beside <Subject 2>'s wet glass window. The camera pushes in with small amplitude at slow speed toward <Subject 1>, who stares silently into the rain with heavy eyelids, his breath lightly fogging the cold glass.\n[Shot 2] At 00:06.500, the camera cuts to a medium close-up profile. The camera tracks right with small amplitude at slow speed as <Subject 1> lowers his gaze, curls his fingers around the heavy crystal glass, lifts it two inches from the table, hesitates with tight jaw tension, and rests it back onto the damp wood without taking a sip.",
+        "overall_soundscape": "Low rumble of distant thunder, rhythmic rainfall pattering against glass, a subtle low-frequency hum of a neon transformer, and the sharp dull thud of a heavy glass touching wood.",
+        "non_diegetic_music": "A gentle, melancholic Mandarin vocal ballad supported by fingerpicked acoustic guitar and warm, lingering cello pads playing at 68 BPM."
+      }
+    }
+  ],
+  "continuity_requirements": {
+    "character_identity": [
+      "Wanderer: 32-year-old East Asian man, sharp jawline, tired melancholic eyes, short swept-back damp black hair."
+    ],
+    "costume_and_accessories": [
+      "Wanderer: tailored charcoal wool trench coat, high-neck black ribbed sweater, dark pleated trousers, polished black oxfords.",
+      "The faceted crystal rocks glass stays in his hand or on the tabletop; the whiskey level only shifts as the glass lifts."
+    ],
+    "anatomy_and_motion": [
+      "Stable human anatomy with natural proportions and five fingers per hand.",
+      "The lift is one slow, continuous rise-hesitate-lower motion; no other large movement."
+    ],
+    "lighting_and_environment": [
+      "Cyan neon spill from camera left and warm tungsten bar light from camera right stay fixed.",
+      "Rain-streaked window, mahogany counter, velvet booth, and brass-framed mirror wall remain in the same positions.",
+      "Rain and neon hum continue without interruption across the internal cut."
+    ],
+    "object_continuity": [
+      "The crystal rocks glass keeps its facets, amber whiskey, ice cube, and condensation through the lift and set-down.",
+      "The glass is set down without being tilted, so no liquid leaves it."
+    ],
+    "camera_continuity": [
+      "Shot 1 pushes in with small amplitude at slow speed; Shot 2 tracks right with small amplitude at slow speed after a straight cut at 00:06.500.",
+      "The subject stays seated on the same side of the window table in both shots.",
+      "Both shots stay within the 35mm anamorphic shallow-focus blue-amber grade."
+    ]
+  },
+  "quality_priorities": [
+    {
+      "priority": 1,
+      "objective": "Character identity and wardrobe continuity",
+      "success_criteria": "He matches his turnaround sheet in both shots; the charcoal trench coat, black ribbed sweater, and oxfords never change."
+    },
+    {
+      "priority": 2,
+      "objective": "No lip-sync / closed mouth",
+      "success_criteria": "His lips stay closed for the entire clip in both shots, with the performance carried by gaze, breath, and jaw tension only."
+    },
+    {
+      "priority": 3,
+      "objective": "Environment continuity",
+      "success_criteria": "The rain-streaked window, neon palette, mahogany counter, and velvet booth remain identical across the internal cut."
+    },
+    {
+      "priority": 4,
+      "objective": "Prop continuity",
+      "success_criteria": "The crystal glass keeps its facets, amber whiskey, ice cube, and condensation through the lift and set-down."
+    },
+    {
+      "priority": 5,
+      "objective": "Emotional read",
+      "success_criteria": "The pose reads as solitary and suppressed, ending on the glass returned to the table without a sip."
+    }
+  ],
+  "assumptions_and_defaults": [
+    "The creative ask was \"no lipsync script\", so the 1st AI Studio response was written as a silent-acting storyboard with no dialogue and closed lips.",
+    "The 1st response defines a single 12 s clip; the render uses 12.958 s (311 frames, a valid 5-mod-17 H3 length at 24 fps) so it covers the 13.032 s track.",
+    "Reference sheets are rendered at 1920x1080 (16:9, at least 2 MP); H3 crops them to its native portrait frame at render time.",
+    "The prop sheet is staged in the third reference slot; the model's ref2va prompt cites only <Picture 1> (character) and <Picture 2> (environment).",
+    "Audio trim uses start_index 0.0 s for the single segment, with the node's 20 s duration default.",
+    "The final audio is the original soundtrack only; the H3-generated vocal/foley layer is discarded (stitch_and_mix.py default).",
+    "The deliverable is the exact 9:16 pass at 1080x1920 (scale + center crop) alongside H3's native 768x1344 portrait master.",
+    "The character is named Wanderer for asset filenames; the 1st-response body itself calls him only 'the 32-year-old East Asian man'."
+  ],
+  "open_questions": []
+}

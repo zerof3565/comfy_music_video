@@ -1,0 +1,12 @@
+{
+  "project": {
+    "title": "thousand-reasons-sadness",
+    "aspect_ratio": "9:16"
+  },
+  "segments": [
+    {"id": 1, "start": 0.0, "duration": 14.375},
+    {"id": 2, "start": 14.375, "duration": 12.958},
+    {"id": 3, "start": 27.333, "duration": 13.667},
+    {"id": 4, "start": 41.0, "duration": 14.375}
+  ]
+}

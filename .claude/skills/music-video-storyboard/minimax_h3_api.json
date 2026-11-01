@@ -1,0 +1,980 @@
+{
+  "119": {
+    "inputs": {
+      "vae_name": "minimax_h3_lynnreal_light_vae_int8_convrot.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load Video VAE",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "120": {
+    "inputs": {
+      "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load Audio VAE",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "128": {
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
+      "type": "minimax",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "131": {
+    "inputs": {
+      "expression": "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17",
+      "values.a": [
+        "6014",
+        0
+      ]
+    },
+    "class_type": "ComfyMathExpression",
+    "_meta": {
+      "title": "Duration_Math",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "153": {
+    "inputs": {
+      "image": "character_figure_front.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Woman Reference",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "154": {
+    "inputs": {
+      "image": "env_central_path_key.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Environment Image",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "155": {
+    "inputs": {
+      "image": "dog_reference_front.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Dog Reference",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "156": {
+    "inputs": {
+      "image": "prop_leash_collar.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Prop Reference",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "443": {
+    "inputs": {
+      "samples": [
+        "874",
+        0
+      ],
+      "vae": [
+        "120",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeAudio",
+    "_meta": {
+      "title": "VAE Decode Audio",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "446": {
+    "inputs": {
+      "fps": 24,
+      "bit_depth": 8,
+      "color_space": "sRGB",
+      "codec": "h264",
+      "images": [
+        "6015",
+        0
+      ],
+      "audio": [
+        "443",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "447": {
+    "inputs": {
+      "filename_prefix": "video/claude_code/clip",
+      "format": "mp4",
+      "format.codec": "h264",
+      "format.codec.encoding": "re-encode",
+      "format.codec.encoding.crf": 15,
+      "codec": "auto",
+      "video": [
+        "446",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "873": {
+    "inputs": {
+      "enabled": true,
+      "cache_contents": "hidden",
+      "backend": "auto",
+      "precision": "int4",
+      "refresh_interval": 0,
+      "verbose": false,
+      "allow_disk": false,
+      "vram_margin_gb": 1,
+      "free_after_pass": false,
+      "model": [
+        "7889",
+        0
+      ]
+    },
+    "class_type": "H3FrozenVideoCache",
+    "_meta": {
+      "title": "H3 Frozen Video Cache",
+      "cnr_id": "comfyui-h3-audiorefine",
+      "ver": "1.0.4"
+    }
+  },
+  "874": {
+    "inputs": {
+      "seed": [
+        "6053",
+        0
+      ],
+      "steps": 8,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "audio_denoise": 0.3,
+      "video_denoise": 0,
+      "model": [
+        "873",
+        0
+      ],
+      "positive": [
+        "7518",
+        0
+      ],
+      "negative": [
+        "6416",
+        0
+      ],
+      "latent": [
+        "5736",
+        0
+      ]
+    },
+    "class_type": "H3AudioRefineSampler",
+    "_meta": {
+      "title": "H3 Audio Refine Sampler",
+      "cnr_id": "comfyui-h3-audiorefine",
+      "ver": "1.0.4"
+    }
+  },
+  "5632": {
+    "inputs": {
+      "shift_video": 12,
+      "shift_audio": 3,
+      "model": [
+        "7865",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3SigmaShift",
+    "_meta": {
+      "title": "ModelSamplingMiniMaxH3",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "5643": {
+    "inputs": {
+      "shift_video": 12,
+      "shift_audio": 3,
+      "model": [
+        "7869",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3SigmaShift",
+    "_meta": {
+      "title": "ModelSamplingMiniMaxH3",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "5734": {
+    "inputs": {
+      "av_latent": [
+        "6045",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "Separate AV Latent",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "5736": {
+    "inputs": {
+      "video_latent": [
+        "5744",
+        0
+      ],
+      "audio_latent": [
+        "5734",
+        1
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "Concat AV Latent",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "5744": {
+    "inputs": {
+      "upscale_method": "bicubic",
+      "width": 32,
+      "height": 32,
+      "crop": "disabled",
+      "samples": [
+        "5734",
+        0
+      ]
+    },
+    "class_type": "LatentUpscale",
+    "_meta": {
+      "title": "Upscale Latent",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6009": {
+    "inputs": {
+      "value": "subject_definitions:\n<Subject 1> is the blonde woman in `character_figure_front.png`, long straight shoulder-length blonde hair, warm oval face, light natural makeup, wearing a long beige trench coat open over a cream knit sweater, dark slim jeans, and tan ankle boots.\n<Subject 2> is the golden retriever in `dog_reference_front.png`, a dense golden coat, broad head, floppy ears, dark nose, bushy tail, and a brown leather collar with a small metal tag.\n<Picture 1> is the blonde woman in `character_figure_front.png` (same identity as <Subject 1>), used as the opening reference frame.\n<Picture 2> is the environment key frame `env_central_path_key.png`: the tree-lined paved path in Central Park in autumn, amber-red-gold foliage arching overhead with dappled late-morning sunlight on the ground.\n<Picture 3> is the golden retriever in `dog_reference_front.png` (same identity as <Subject 2>).\n<Picture 4> is the tan braided leather leash and the rich brown leather collar with a small round metal tag in `prop_leash_collar.png`.\n\nsummary:\n[reference generation + keyframe completion] The single continuous 5s take opens on <Picture 1>, the blonde woman in the beige trench coat walking a relaxed pace, alongside <Picture 3>, the golden retriever whose tail wags and head bobs, on the dappled Central Park autumn path <Picture 2>; the camera orbits slowly from a 3/4 front view to a side profile.\n\nretention_analysis:\n<Picture 1> ([Shot 1] opening frame): fully_preserved - the blonde woman's face, shoulder-length blonde hair, beige trench coat, cream sweater, dark jeans, and tan boots from `character_figure_front.png` are retained.\n<Picture 2> ([Shot 1] environment): fully_preserved - the dappled autumn path composition and warm lighting from `env_central_path_key.png` are carried into the scene.\n<Picture 3> ([Shot 1]): fully_preserved - the golden retriever's golden coat, head shape, wagging tail, and brown collar with tag from `dog_reference_front.png` are retained.\n<Picture 4> ([Shot 1]): fully_preserved - the tan leash and brown collar with tag from `prop_leash_collar.png` are retained.\n\ndetailed_description:\nCinematic photoreal footage in Central Park on an autumn morning — shallow depth of field, warm late-morning sunlight through amber and red foliage, dappled light on the path, natural color grade with amber/olive/cream tones, and subtle film grain.\n[Shot 1] The segment is one continuous 5s take that begins from <Picture 1>. The camera tracks alongside the subjects in a slow orbit with small amplitude at slow speed, starting on a 3/4 front view and ending on a side profile. <Subject 1>, the blonde woman in the beige trench coat over a cream sweater (see <Picture 1>), walks at a relaxed pace holding the tan leather leash of <Subject 2>, the golden retriever (see <Picture 3>), which walks a step ahead with its bushy tail wagging continuously and its head bobbing with each stride. They move along the dappled autumn path <Picture 2>, with amber-red-gold foliage arching overhead. Her shoulder-length blonde hair and the trench-coat collar sway with her steps; she looks ahead with a calm smile, then glances down at the dog. The dog's ears flap slightly and its collar tag (see <Picture 4>) jingles softly against the leash. Dappled sunlight shifts across both subjects as leaves drift through the canopy overhead, and the camera's slow orbit keeps them both centered in a medium-full frame.\n\noverall_soundscape:\nSoft park ambience throughout: a low wind rustling through leaves, a faint distant city and traffic hum, the crisp crunch of fallen leaves underfoot, the golden retriever's steady breathing, and the soft jingle of the collar tag against the leash. No vocals.\n\nnon_diegetic_music:\nA warm, light acoustic score — fingerpicked acoustic guitar with a soft sustained cello underneath, slow and unhurried tempo, calm and gentle dynamics, no swell, holding for the full 5s."
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6014": {
+    "inputs": {
+      "value": 5
+    },
+    "class_type": "easy float",
+    "_meta": {
+      "title": "Duration",
+      "cnr_id": "comfyui-easy-use",
+      "ver": "1.3.6"
+    }
+  },
+  "6015": {
+    "inputs": {
+      "samples": [
+        "6038",
+        0
+      ],
+      "vae": [
+        "119",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6037": {
+    "inputs": {
+      "contrast": 0.9,
+      "preserve_norm": false,
+      "samples": [
+        "7460",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3LatentContrast",
+    "_meta": {
+      "title": "MiniMax H3 Latent Contrast",
+      "aux_id": "Tr1dae/ComfyUI-MiniMaxH3_LatentUpscaler",
+      "ver": "895e3c471164423f0ea0e8eaf45eb701efe641ae"
+    }
+  },
+  "6038": {
+    "inputs": {
+      "contrast": 0.85,
+      "preserve_norm": true,
+      "samples": [
+        "6037",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3LatentContrast",
+    "_meta": {
+      "title": "MiniMax H3 Latent Contrast",
+      "aux_id": "Tr1dae/ComfyUI-MiniMaxH3_LatentUpscaler",
+      "ver": "895e3c471164423f0ea0e8eaf45eb701efe641ae"
+    }
+  },
+  "6045": {
+    "inputs": {
+      "any_02": [
+        "6450",
+        1
+      ]
+    },
+    "class_type": "Any Switch (rgthree)",
+    "_meta": {
+      "title": "latent",
+      "cnr_id": "rgthree-comfy",
+      "ver": "449c58fcdd612f7733e54c51f6758ead63fa180b"
+    }
+  },
+  "6053": {
+    "inputs": {
+      "seed": -1
+    },
+    "class_type": "Seed (rgthree)",
+    "_meta": {
+      "title": "Seed",
+      "cnr_id": "rgthree-comfy",
+      "ver": "449c58fcdd612f7733e54c51f6758ead63fa180b"
+    }
+  },
+  "6073": {
+    "inputs": {
+      "resolution": "512x896: portrait (1:1.75) [~0.46 MP]",
+      "draw_preview": false,
+      "show_checker": false,
+      "show_image": false,
+      "swap_dimensions": [
+        "7893",
+        0
+      ],
+      "custom_width": 2304,
+      "custom_height": 4032,
+      "divisible_by": "32"
+    },
+    "class_type": "OlmResolutionPicker",
+    "_meta": {
+      "title": "Phase 1 Composition",
+      "aux_id": "o-l-l-i/ComfyUI-Olm-Resolution-Picker",
+      "ver": "77faecf53a0cdc80e40e17e094e7a98fdbf32da4"
+    }
+  },
+  "6074": {
+    "inputs": {
+      "resolution": "896x1568: portrait (1:1.75) [~1.40 MP]",
+      "draw_preview": false,
+      "show_checker": false,
+      "show_image": false,
+      "swap_dimensions": [
+        "7893",
+        0
+      ],
+      "custom_width": 2304,
+      "custom_height": 4032,
+      "divisible_by": "32"
+    },
+    "class_type": "OlmResolutionPicker",
+    "_meta": {
+      "title": "Phase 2 - Upscale 1st Pass",
+      "aux_id": "o-l-l-i/ComfyUI-Olm-Resolution-Picker",
+      "ver": "77faecf53a0cdc80e40e17e094e7a98fdbf32da4"
+    }
+  },
+  "6416": {
+    "inputs": {
+      "conditioning": [
+        "7518",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6450": {
+    "inputs": {
+      "noise": [
+        "6451",
+        0
+      ],
+      "guider": [
+        "6452",
+        0
+      ],
+      "sampler": [
+        "6883",
+        0
+      ],
+      "sigmas": [
+        "7862",
+        0
+      ],
+      "latent_image": [
+        "7906",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "phase 1",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6451": {
+    "inputs": {
+      "noise_seed": [
+        "6053",
+        0
+      ]
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6452": {
+    "inputs": {
+      "model": [
+        "5632",
+        0
+      ],
+      "conditioning": [
+        "7518",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "Basic Guider",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6606": {
+    "inputs": {
+      "unet_name": "minimax/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "FL2VA Weight",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "6883": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7455": {
+    "inputs": {
+      "noise_seed": [
+        "6053",
+        0
+      ]
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7460": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "5643",
+        0
+      ],
+      "conditioning": [
+        "7518",
+        0
+      ],
+      "latent": [
+        "6450",
+        1
+      ],
+      "noise": [
+        "7455",
+        0
+      ],
+      "sampler": [
+        "7871",
+        0
+      ],
+      "sigmas": [
+        "7872",
+        1
+      ],
+      "latent_upscale_param": [
+        "7569",
+        0
+      ],
+      "temporal_split_param": [
+        "7464",
+        0
+      ]
+    },
+    "class_type": "MMH3UltimateUpscale",
+    "_meta": {
+      "title": "phase 2a",
+      "cnr_id": "Comfyui-MMH3-UltimateUpscale",
+      "ver": "fe6658f6d144066f14150d3526247b417683ff2b"
+    }
+  },
+  "7464": {
+    "inputs": {
+      "chunk_length": 153,
+      "temporal_overlap": 17,
+      "anchor_strength": 1
+    },
+    "class_type": "MMH3TemporalSplitParams",
+    "_meta": {
+      "title": "MMH3 Temporal Split Params",
+      "cnr_id": "Comfyui-MMH3-UltimateUpscale",
+      "ver": "fe6658f6d144066f14150d3526247b417683ff2b"
+    }
+  },
+  "7518": {
+    "inputs": {
+      "prompt": [
+        "6009",
+        0
+      ],
+      "width": [
+        "6073",
+        0
+      ],
+      "height": [
+        "6073",
+        1
+      ],
+      "length": [
+        "131",
+        1
+      ],
+      "ref_image_size": "match",
+      "clip": [
+        "128",
+        0
+      ],
+      "vae": [
+        "119",
+        0
+      ],
+      "audio_vae": [
+        "120",
+        0
+      ],
+      "ref_images.ref_image_0": [
+        "153",
+        0
+      ],
+      "ref_images.ref_image_1": [
+        "154",
+        0
+      ],
+      "ref_images.ref_image_2": [
+        "155",
+        0
+      ],
+      "ref_images.ref_image_3": [
+        "156",
+        0
+      ],
+      "ref_audios.ref_audio_0": [
+        "7895",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3ReferenceToVideo",
+    "_meta": {
+      "title": "MiniMax H3 Reference to Video",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7569": {
+    "inputs": {
+      "model_name": "minimax_h3_latent_upscaler_3d_bf16.safetensors",
+      "width": [
+        "6074",
+        0
+      ],
+      "height": [
+        "6074",
+        1
+      ],
+      "device": "cuda",
+      "precision": "bf16",
+      "offload_model": false
+    },
+    "class_type": "MMH3LatentUpscaleWithModelParams",
+    "_meta": {
+      "title": "MMH3 Latent Upscale with Model Params",
+      "cnr_id": "Comfyui-MMH3-UltimateUpscale",
+      "ver": "fe6658f6d144066f14150d3526247b417683ff2b"
+    }
+  },
+  "7862": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 6,
+      "denoise": 1,
+      "model": [
+        "7866",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7865": {
+    "inputs": {
+      "lora_name": "pika_h3_flex_fl2va_v1_bf16.safetensors",
+      "strength_model": 1,
+      "model": [
+        "7866",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load Turbo LoRA",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7866": {
+    "inputs": {
+      "fused_qkv": "auto",
+      "mlp_memory": "auto",
+      "chunk_rows": 4096,
+      "preserve_precision": true,
+      "precision_mode": "Auto",
+      "qkv_streaming_mode": "Auto",
+      "embedding_memory_mode": "Auto",
+      "kitchen_v_memory_mode": "Standard",
+      "model": [
+        "6606",
+        0
+      ]
+    },
+    "class_type": "H3MemoryOptimization",
+    "_meta": {
+      "title": "H3 Memory Optimization",
+      "cnr_id": "h3-optimizations",
+      "ver": "c6bc3cfc58c18c3a6220aeea09116e1eebd91669"
+    }
+  },
+  "7869": {
+    "inputs": {
+      "lora_name": "minimax_h3_open_regenerate_2k_refiner_rank_384_bf16.safetensors",
+      "strength_model": 1,
+      "model": [
+        "7866",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "2k refiner LoRA",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7870": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 12,
+      "denoise": 1,
+      "model": [
+        "6606",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7871": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7872": {
+    "inputs": {
+      "step": 9,
+      "sigmas": [
+        "7870",
+        0
+      ]
+    },
+    "class_type": "SplitSigmas",
+    "_meta": {
+      "title": "SplitSigmas",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7879": {
+    "inputs": {
+      "noise_seed": [
+        "6053",
+        0
+      ]
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7889": {
+    "inputs": {
+      "shift_video": 12,
+      "shift_audio": 3,
+      "model": [
+        "6606",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3SigmaShift",
+    "_meta": {
+      "title": "ModelSamplingMiniMaxH3",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7893": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "easy boolean",
+    "_meta": {
+      "title": "16:9 = True; 9:16 = False",
+      "cnr_id": "comfyui-easy-use",
+      "ver": "1.3.6"
+    }
+  },
+  "7895": {
+    "inputs": {
+      "start_index": 0,
+      "duration": 20,
+      "audio": [
+        "7909",
+        0
+      ]
+    },
+    "class_type": "TrimAudioDuration",
+    "_meta": {
+      "title": "Music Start Index",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7901": {
+    "inputs": {
+      "audio": [
+        "7895",
+        0
+      ],
+      "vae": [
+        "120",
+        0
+      ]
+    },
+    "class_type": "VAEEncodeAudio",
+    "_meta": {
+      "title": "VAE Encode Audio",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7902": {
+    "inputs": {
+      "invert": false,
+      "frames": [
+        "131",
+        1
+      ],
+      "scale": 0.5,
+      "audio_path": [
+        "7909",
+        1
+      ],
+      "width": [
+        "6073",
+        0
+      ],
+      "height": [
+        "6073",
+        1
+      ]
+    },
+    "class_type": "CreateAudioMask",
+    "_meta": {
+      "title": "Create Audio Mask",
+      "cnr_id": "comfyui-kjnodes",
+      "ver": "d7641533d6634eb05f8570c980fce8fc8528dc7b"
+    }
+  },
+  "7903": {
+    "inputs": {
+      "av_latent": [
+        "7518",
+        1
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "Separate AV Latent",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7905": {
+    "inputs": {
+      "samples": [
+        "7901",
+        0
+      ],
+      "mask": [
+        "7908",
+        0
+      ]
+    },
+    "class_type": "SetLatentNoiseMask",
+    "_meta": {
+      "title": "Set Latent Noise Mask",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7906": {
+    "inputs": {
+      "video_latent": [
+        "7903",
+        0
+      ],
+      "audio_latent": [
+        "7905",
+        0
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "Concat AV Latent",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7908": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "7902",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "Convert Image to Mask",
+      "cnr_id": "comfy-core",
+      "ver": "0.43.0"
+    }
+  },
+  "7909": {
+    "inputs": {
+      "audio": "(none)",
+      "file": "(none)",
+      "📁 Browse Files": null,
+      "audio_preview": ""
+    },
+    "class_type": "LoadAudioPlus",
+    "_meta": {
+      "title": "Load Music File"
+    }
+  }
+}

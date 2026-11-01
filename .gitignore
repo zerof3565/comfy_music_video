@@ -1,0 +1,18 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# music-video-storyboard staging
+.upload_tmp/
+aistudio_response_md.txt
+.debug/
+
+# run outputs stay local (audio, sheets, segments, final renders)
+outputs/

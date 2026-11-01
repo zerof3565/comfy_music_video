@@ -1,0 +1,256 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://comfy-control/minimax-h3-storyboard.schema.json",
+  "title": "Minimax H3 Storyboard Blueprint",
+  "type": "object",
+  "required": ["project", "subject_continuity", "segments", "continuity_requirements", "quality_priorities", "assumptions_and_defaults", "open_questions"],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["source", "concept", "genre", "visual_style", "target_duration_seconds", "aspect_ratio", "generation_strategy", "segments_count", "primary_objective"],
+      "properties": {
+        "source": { "type": "string", "enum": ["idea", "prompt", "image", "video-analysis"] },
+        "concept": { "type": "string", "description": "One- or two-line concept statement." },
+        "genre": { "type": "string" },
+        "visual_style": { "type": "string", "description": "Locked visual style / art direction." },
+        "mood": { "type": "string" },
+        "target_duration_seconds": { "type": "number", "minimum": 0 },
+        "aspect_ratio": { "type": "string", "description": "e.g. 9:16, 16:9, 1:1" },
+        "generation_strategy": { "type": "string", "enum": ["one-continuous-shot", "stitched-segments"] },
+        "segments_count": { "type": "integer", "minimum": 1 },
+        "reference_image": { "type": ["string", "null"], "description": "Path to the reference image reused across segments, or null." },
+        "primary_objective": { "type": "string" }
+      }
+    },
+    "subject_continuity": {
+      "type": "object",
+      "required": ["characters", "style_lock", "palette"],
+      "properties": {
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "description", "consistency_notes"],
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string", "description": "Canonical identity line, copied verbatim into every segment prompt." },
+              "consistency_notes": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "style_lock": { "type": "string", "description": "One line locking the visual style for the whole video." },
+        "palette": { "type": "array", "items": { "type": "string" } },
+        "world_rules": { "type": "array", "items": { "type": "string" }, "description": "Immutable rules of the world (lighting direction, physics, no-new-characters, etc.)." }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "timecode", "start", "end", "duration", "narrative_purpose", "action", "camera", "secondary_motion", "transition_in", "transition_out", "cut", "ref2va"],
+        "properties": {
+          "id": { "type": "integer" },
+          "timecode": { "type": "string", "description": "e.g. 0:00-0:05" },
+          "start": { "type": "number" },
+          "end": { "type": "number" },
+          "duration": { "type": "number" },
+          "narrative_purpose": { "type": "string" },
+          "action": { "type": "string", "description": "Primary action, concrete verbs, in order." },
+          "character_blocking": { "type": "string" },
+          "camera": {
+            "type": "object",
+            "required": ["angle", "size", "move"],
+            "properties": {
+              "angle": { "type": "string", "description": "e.g. low angle, dutch angle, high angle, POV" },
+              "size": { "type": "string", "description": "e.g. close-up, medium, full body, extreme wide" },
+              "move": { "type": "string", "description": "e.g. push-in, orbit, whip pan, dolly, tilt" },
+              "notes": { "type": "string" }
+            }
+          },
+          "motion": { "type": "string", "description": "Primary motion." },
+          "beats": {
+            "type": "array",
+            "description": "The internal timed beats/locations chained INSIDE this single segment prompt via hard/whip cuts. A beat is a short event (e.g. a 0.5–1s location change in a hyper-lapse). This is the list that gets compressed into ONE segment prompt as internal [Shot N] markers — one prompt per segment, never one prompt per beat. Omit or leave empty for a segment that is a single continuous shot with no internal cuts.",
+            "items": {
+              "type": "object",
+              "required": ["time_offset", "location_or_event", "action", "outfit"],
+              "properties": {
+                "time_offset": { "type": "string", "description": "Relative to segment start (0:00), e.g. 0:00.000, 0:01.000, 0:02.000." },
+                "location_or_event": { "type": "string", "description": "The location/setting of this beat, or the event if not a location change." },
+                "action": { "type": "string", "description": "What the subject does in this beat (expression + gesture)." },
+                "outfit": { "type": "string", "description": "The distinctive outfit worn in this beat." }
+              }
+            }
+          },
+          "secondary_motion": { "type": "string", "description": "Hair, fabric, particles, environment response." },
+          "lighting": { "type": "string" },
+          "transition_in": { "type": "string", "description": "The first beat/composition of this segment that the cut bridges — ideally a framing different from the previous segment's ending." },
+          "transition_out": { "type": "string", "description": "The last beat/composition of this segment that the cut bridges — the framing the next segment should open on a different angle/size than." },
+          "cut": {
+            "type": "object",
+            "description": "The cinematic edit that connects this segment to the previous one. Replaces last-frame conditioning: segments are joined by intentional cuts (j-cut, l-cut, straight-cut, match-cut, whip-pan, action-cut, cutaway) on CONTRASTING compositions, never by feeding one clip's final frame into the next.",
+            "required": ["type", "description"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["j-cut", "l-cut", "straight-cut", "match-cut", "whip-pan", "action-cut", "cutaway"],
+                "description": "The edit type used to enter this segment."
+              },
+              "description": { "type": "string", "description": "How the cut is executed and what carries the eye across it." },
+              "audio_overlap_seconds": {
+                "type": ["number", "null"],
+                "description": "For j-cut/l-cut: how many seconds of audio cross the cut (audio from the next segment for j-cut, from the previous for l-cut). null for a straight-cut."
+              },
+              "composition_plan": {
+                "type": "object",
+                "required": ["ends_on", "opens_on"],
+                "properties": {
+                  "ends_on": { "type": "string", "description": "Framing/angle of this segment's final beat (e.g. medium close-up, low angle)." },
+                  "opens_on": { "type": "string", "description": "Contrasting framing/angle the NEXT segment must open on, so the cut reads as an intentional edit, not a stuttered first-frame match." }
+                }
+              }
+            }
+          },
+          "sound_cue": { "type": "string", "description": "Designed sound/music reference for H3 to generate (it produces music and foley with the video). Can be used to set up a j-cut/l-cut by introducing the next segment's audio early." },
+          "focus_hierarchy": { "type": "array", "items": { "type": "string" } },
+          "reference_image": { "type": ["string", "null"], "description": "Reference image file reused for this segment (from references), or null." },
+          "ref2va": {
+            "type": "object",
+            "description": "The self-contained full-reference (ref2va) rewrite for this segment, ready to paste into an image-to-video / text-to-video job. Labels are scoped to this segment.",
+            "required": ["subject_definitions", "summary", "retention_analysis", "detailed_description", "overall_soundscape", "non_diegetic_music"],
+            "properties": {
+              "subject_definitions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "One line per reference label used in this segment (<Subject N> / <Picture N> / <Video N> / <Audio N>), with the reference-image source cited inside <Subject N> definitions when the look is locked from a sheet."
+              },
+              "summary": {
+                "type": "string",
+                "description": "One paragraph beginning with a square-bracketed task-type prefix (e.g. [reference generation + keyframe completion])."
+              },
+              "retention_analysis": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "One line per label with a fixed relationship marker: fully_preserved / partially_preserved / attribute_transfer / weak_reference."
+              },
+              "detailed_description": {
+                "type": "string",
+                "description": "Style opening + shot-by-shot (per-beat) playback order with reference labels, (Sx) speaker IDs, and <d>[Language] dialogue. One prompt per segment: internal beats are [Shot N] At MM:SS.mmm markers relative to the segment start. Scaled to the ~12-15s clip, not the number of beats; not the full 350-500 word whole-video range."
+              },
+              "overall_soundscape": {
+                "type": "string",
+                "description": "Ambience and physical sounds H3 generates: fully stated (what is heard, texture, level, entry/exit). Complete generation instructions, not a terse post-prod reference."
+              },
+              "non_diegetic_music": {
+                "type": "string",
+                "description": "Audience-only background score H3 generates: instrumentation, tempo, dynamics; N/A only if deliberately silent."
+              }
+            }
+          }
+        }
+      }
+    },
+    "continuity_requirements": {
+      "type": "object",
+      "required": ["character_identity", "costume_and_accessories", "lighting_and_environment", "camera_continuity"],
+      "properties": {
+        "character_identity": { "type": "array", "items": { "type": "string" } },
+        "costume_and_accessories": { "type": "array", "items": { "type": "string" } },
+        "anatomy_and_motion": { "type": "array", "items": { "type": "string" } },
+        "lighting_and_environment": { "type": "array", "items": { "type": "string" } },
+        "object_continuity": { "type": "array", "items": { "type": "string" } },
+        "camera_continuity": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "quality_priorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["priority", "objective", "success_criteria"],
+        "properties": {
+          "priority": { "type": "integer" },
+          "objective": { "type": "string" },
+          "success_criteria": { "type": "string" }
+        }
+      }
+    },
+    "assumptions_and_defaults": { "type": "array", "items": { "type": "string" } },
+    "open_questions": { "type": "array", "items": { "type": "string" } },
+    "references": {
+      "type": "object",
+      "description": "Pre-production reference sheets generated with an image model, then consumed by H3 image-to-video to lock identity/continuity.",
+      "required": ["inventory"],
+      "properties": {
+        "character_sheets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["role", "generation_prompt", "key_frame_file", "views", "source"],
+            "properties": {
+              "role": { "type": "string", "description": "e.g. protagonist, antagonist, side character" },
+              "generation_prompt": { "type": "string", "description": "Prompt to generate the turnaround/reference sheet with an image model" },
+              "key_frame_file": { "type": "string", "description": "Filename of the chosen key frame fed to H3" },
+              "views": { "type": "array", "items": { "type": "string" }, "description": "e.g. front, 3/4, side, back, expressions" },
+              "source": { "type": "string", "enum": ["generated", "user-provided"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "environment_sheets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "generation_prompt", "key_frame_file", "source"],
+            "properties": {
+              "name": { "type": "string" },
+              "generation_prompt": { "type": "string" },
+              "key_frame_file": { "type": "string" },
+              "source": { "type": "string", "enum": ["generated", "user-provided"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "prop_sheets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "generation_prompt", "key_frame_file", "source"],
+            "properties": {
+              "name": { "type": "string" },
+              "generation_prompt": { "type": "string" },
+              "key_frame_file": { "type": "string" },
+              "source": { "type": "string", "enum": ["generated", "user-provided"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "inventory": {
+          "type": "object",
+          "description": "Pre-determined counts of what must be locked, determined before generating any sheet (see the skill's Step 2). character_sheets, environment_sheets, and prop_sheets each must contain at least this many entries.",
+          "required": ["character_count", "prop_count", "location_count"],
+          "properties": {
+            "character_count": { "type": "integer", "minimum": 0 },
+            "prop_count": { "type": "integer", "minimum": 0 },
+            "location_count": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "continuity_manifest": {
+      "type": "array",
+      "description": "Maps each subject to its reference file and the segments that reuse it, so the generator never guesses which image to feed.",
+      "items": {
+        "type": "object",
+        "required": ["subject", "reference_file", "segment_ids", "weight"],
+        "properties": {
+          "subject": { "type": "string", "description": "e.g. protagonist, ink sword, moonlit ink landscape" },
+          "reference_file": { "type": "string" },
+          "segment_ids": { "type": "array", "items": { "type": "integer" } },
+          "weight": { "type": "string", "description": "e.g. high, medium, low reference strength" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

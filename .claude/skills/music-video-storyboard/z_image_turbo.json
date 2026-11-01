@@ -1,0 +1,346 @@
+{
+  "7861": {
+    "inputs": {
+      "noise_seed": 536364380920069
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "7863": {
+    "inputs": {
+      "unet_name": "others/z_image_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load dit"
+    }
+  },
+  "7864": {
+    "inputs": {
+      "shift": 3,
+      "sampling": "flow",
+      "model": [
+        "7863",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "7865": {
+    "inputs": {
+      "noise": [
+        "7861",
+        0
+      ],
+      "guider": [
+        "7869",
+        0
+      ],
+      "sampler": [
+        "7879",
+        0
+      ],
+      "sigmas": [
+        "7896",
+        1
+      ],
+      "latent_image": [
+        "7885",
+        1
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "7866": {
+    "inputs": {
+      "samples": [
+        "7865",
+        1
+      ],
+      "vae": [
+        "7871",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "7867": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 12,
+      "denoise": 1,
+      "model": [
+        "7864",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler"
+    }
+  },
+  "7868": {
+    "inputs": {
+      "preview_text": "tensor([0.9000, 0.8573, 0.8081, 0.7500, 0.6821, 0.6007, 0.5000, 0.3756, 0.2158,\n        0.0000])",
+      "text": [
+        "7896",
+        1
+      ]
+    },
+    "class_type": "ShowTextPlus",
+    "_meta": {
+      "title": "Show as Text"
+    }
+  },
+  "7869": {
+    "inputs": {
+      "model": [
+        "7864",
+        0
+      ],
+      "conditioning": [
+        "7875",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "Basic Guider"
+    }
+  },
+  "7870": {
+    "inputs": {
+      "clip_name": "qwen_3_4b.safetensors",
+      "type": "lumina2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load text encoder"
+    }
+  },
+  "7871": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "7875": {
+    "inputs": {
+      "text": "A beautiful young East Asian woman in her mid twenties with soft natural features and a gentle contemplative expression, long dark hair falling past her shoulders in slightly tousled layers with a subtle sheen. She wears a delicate white nightgown made of sheer lightweight fabric with fine lace trim along the V-neckline and thin spaghetti straps, a small keyhole cutout at the bust, and a soft cream knit cardigan slipping loosely off her bare shoulders. She sits in a relaxed slightly turned pose, her gaze directed softly away from the camera toward the left… [cozy window room, wooden sill, white mug, vase of greenery, blurred leafy trees behind sheer curtains] …Captured on an 85mm f/1.4 lens with a very shallow depth of field and oval bokeh, Kodak Portra 400 color grading with a warm tonal balance and fine film grain, shot at eye level from a calm third-person perspective.",
+      "clip": [
+        "7870",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7879": {
+    "inputs": {
+      "sampler_name": "euler_ancestral"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "7884": {
+    "inputs": {
+      "width": 1920,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "EmptySD3LatentImage"
+    }
+  },
+  "7885": {
+    "inputs": {
+      "noise": [
+        "7886",
+        0
+      ],
+      "guider": [
+        "7890",
+        0
+      ],
+      "sampler": [
+        "7887",
+        0
+      ],
+      "sigmas": [
+        "7895",
+        0
+      ],
+      "latent_image": [
+        "7884",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "7886": {
+    "inputs": {
+      "noise_seed": 857693703346002
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "7887": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "7888": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 50,
+      "denoise": 1,
+      "model": [
+        "7893",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler"
+    }
+  },
+  "7890": {
+    "inputs": {
+      "cfg": 3.5,
+      "model": [
+        "7893",
+        0
+      ],
+      "positive": [
+        "7875",
+        0
+      ],
+      "negative": [
+        "7891",
+        0
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFG Guider"
+    }
+  },
+  "7891": {
+    "inputs": {
+      "conditioning": [
+        "7875",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out"
+    }
+  },
+  "7892": {
+    "inputs": {
+      "unet_name": "z_image_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load dit"
+    }
+  },
+  "7893": {
+    "inputs": {
+      "shift": 3,
+      "sampling": "flow",
+      "model": [
+        "7892",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "7894": {
+    "inputs": {
+      "preview_text": "tensor([1.0000, 0.9932, 0.9863, 0.9792, 0.9718, 0.9643, 0.9565, 0.9485, 0.9403,\n        0.9318, 0.9231, 0.9141, 0.9048, 0.8952, 0.8852, 0.8750])",
+      "text": [
+        "7895",
+        0
+      ]
+    },
+    "class_type": "ShowTextPlus",
+    "_meta": {
+      "title": "Show as Text"
+    }
+  },
+  "7895": {
+    "inputs": {
+      "step": 15,
+      "sigmas": [
+        "7888",
+        0
+      ]
+    },
+    "class_type": "SplitSigmas",
+    "_meta": {
+      "title": "SplitSigmas"
+    }
+  },
+  "7896": {
+    "inputs": {
+      "step": 3,
+      "sigmas": [
+        "7867",
+        0
+      ]
+    },
+    "class_type": "SplitSigmas",
+    "_meta": {
+      "title": "SplitSigmas"
+    }
+  },
+  "7897": {
+    "inputs": {
+      "filename_prefix": "images/claude_code/zit",
+      "images": [
+        "7866",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}
